@@ -1,0 +1,142 @@
+@import "@fontsource/vazirmatn/300.css";
+@import "@fontsource/vazirmatn/400.css";
+@import "@fontsource/vazirmatn/500.css";
+@import "@fontsource/vazirmatn/600.css";
+@import "@fontsource/vazirmatn/700.css";
+@import "@fontsource/vazirmatn/800.css";
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Vazirmatn", ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-200: #c7d2fe;
+  --color-brand-300: #a5b4fc;
+  --color-brand-400: #818cf8;
+  --color-brand-500: #6366f1;
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #4338ca;
+
+  --color-ink-50: #f8fafc;
+  --color-ink-100: #f1f5f9;
+  --color-ink-200: #e5e9f2;
+  --color-ink-300: #cbd5e1;
+  --color-ink-400: #94a3b8;
+  --color-ink-500: #64748b;
+  --color-ink-600: #475569;
+  --color-ink-700: #334155;
+  --color-ink-800: #1e293b;
+  --color-ink-900: #0f172a;
+
+  --color-canvas: #f4f6fb;
+  --color-success: #0f9d76;
+  --color-warning: #d97706;
+  --color-danger: #e11d48;
+  --color-info: #0284c7;
+}
+
+@layer base {
+  html {
+    font-feature-settings: "ss01";
+  }
+  body {
+    @apply bg-canvas text-ink-800 font-sans antialiased;
+    font-size: 14px;
+  }
+  ::selection {
+    @apply bg-brand-200 text-ink-900;
+  }
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-2xl border border-ink-200/80 shadow-[0_1px_2px_rgba(16,24,40,0.04)];
+  }
+  .card-pad {
+    @apply p-5;
+  }
+  .field {
+    @apply w-full h-11 rounded-xl border border-ink-200 bg-ink-50/60 px-3 text-[13.5px] text-ink-800
+      outline-none transition placeholder:text-ink-400
+      focus:border-brand-400 focus:bg-white focus:ring-4 focus:ring-brand-500/10;
+  }
+  .field-sm {
+    @apply h-9 rounded-lg text-[13px];
+  }
+  .label {
+    @apply block text-[12.5px] font-medium text-ink-500 mb-1.5;
+  }
+  .btn,
+  .btn-primary,
+  .btn-ghost,
+  .btn-soft,
+  .btn-success,
+  .btn-danger-soft {
+    @apply inline-flex items-center justify-center gap-2 h-10 px-4 rounded-xl text-[13px] font-semibold
+      transition select-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply bg-brand-600 text-white hover:bg-brand-700 shadow-sm shadow-brand-600/20;
+  }
+  .btn-ghost {
+    @apply bg-white text-ink-600 border border-ink-200 hover:bg-ink-50;
+  }
+  .btn-soft {
+    @apply bg-brand-50 text-brand-700 hover:bg-brand-100;
+  }
+  .btn-success {
+    @apply bg-success text-white hover:brightness-95;
+  }
+  .btn-danger-soft {
+    @apply bg-danger/5 text-danger hover:bg-danger/10;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 h-7 px-2.5 rounded-full text-[11.5px] font-medium;
+  }
+  .th {
+    @apply text-right text-[11.5px] font-medium text-ink-500 px-4 py-3 whitespace-nowrap;
+  }
+  .td {
+    @apply text-right text-[13px] text-ink-700 px-4 py-3 whitespace-nowrap;
+  }
+  .num {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ---- print ----
+   Every print job renders its own sheet into .print-root (see src/print.tsx)
+   and declares its paper size, so the app shell can stay display:none and
+   pagination is decided by the sheet alone. */
+.print-root {
+  display: none;
+}
+
+@media print {
+  @page {
+    margin: 0;
+  }
+  html,
+  body {
+    background: #fff;
+  }
+  #root,
+  .no-print {
+    display: none !important;
+  }
+  .print-root {
+    display: block !important;
+    background: #fff;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .print-root tr {
+    break-inside: avoid;
+  }
+}
