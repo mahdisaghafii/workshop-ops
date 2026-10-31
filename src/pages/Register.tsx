@@ -448,6 +448,19 @@ export function Register({ onRegistered }: { onRegistered: (a: Attendee) => void
         </div>
       </div>
 
+      <div className="h-16 xl:hidden" />
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-ink-200 bg-white/95 px-4 py-3 backdrop-blur xl:hidden">
+        <div className="flex items-center gap-3">
+          <div className="min-w-0 flex-1">
+            <div className="text-[10.5px] text-ink-400">مبلغ نهایی</div>
+            <div className="text-[15px] font-extrabold text-brand-700 num">{money(total)}</div>
+          </div>
+          <button className="btn-primary h-11 px-5" onClick={submit}>
+            <Check size={17} /> ثبت‌نام و پرداخت
+          </button>
+        </div>
+      </div>
+
       <Modal
         open={!!saved}
         onClose={() => setSaved(null)}
