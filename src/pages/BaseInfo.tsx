@@ -7,7 +7,6 @@ import { useStore } from '../store'
 import { PageHeader, SectionCard, Modal, Toggle, StatusPill, EmptyState } from '../components/ui'
 import { useToast } from '../components/Toast'
 import { addDays, faDate, money, num, toFa, toLatin } from '../lib/format'
-import { PROVINCES } from '../lib/constants'
 import type { Meal, Role, Sponsor } from '../lib/types'
 import type { PageKey } from '../lib/types'
 
@@ -86,12 +85,6 @@ export function BaseInfo({ go }: { go: (p: PageKey) => void }) {
               <div>
                 <label className="label">تاریخ پایان</label>
                 <DateStepper value={info.endDate} onChange={(v) => setInfo({ ...info, endDate: v })} />
-              </div>
-              <div>
-                <label className="label">استان برگزاری</label>
-                <select className="field" defaultValue="آذربایجان غربی">
-                  {PROVINCES.map((p) => <option key={p}>{p}</option>)}
-                </select>
               </div>
             </div>
           </SectionCard>
@@ -223,7 +216,7 @@ export function BaseInfo({ go }: { go: (p: PageKey) => void }) {
             <div className="grid grid-cols-2 gap-3">
               <Stat label="درخواست‌ها" value={num(state.attendees.filter((a) => a.giftRequested).length)} />
               <Stat label="تحویل‌شده" value={num(state.attendees.filter((a) => a.giftDeliveredAt).length)} />
-              <Stat label="موجودی انبار" value={num(info.giftStock)} />
+              <Stat label="موجودی انبار" value={num(Math.max(0, info.giftStock - state.attendees.filter((a) => a.giftDeliveredAt).length))} />
               <Stat label="در انتظار" value={num(state.attendees.filter((a) => a.giftRequested && !a.giftDeliveredAt).length)} />
             </div>
             <div className="mt-4 rounded-xl bg-amber-50 p-3 text-[11px] leading-6 text-amber-800">
