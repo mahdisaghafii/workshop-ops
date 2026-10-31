@@ -18,6 +18,9 @@ pnpm preview
 
 نیازمندی: Node.js 20+ و pnpm.
 
+برای انتشار دمو کافی است خروجی `dist/` را روی هر میزبان استاتیک (Netlify Drop، Vercel،
+هاست معمولی یا یک زیرپوشه از سایت) بگذارید؛ مسیر فایل‌ها نسبی است و به تنظیم اضافه نیاز ندارد.
+
 ## پشته فنی
 
 React 19 + TypeScript + Vite، Tailwind CSS v4، `lucide-react` برای آیکون‌ها،
